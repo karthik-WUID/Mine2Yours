@@ -1,0 +1,17 @@
+{
+  "name": "mine2yourlingo",
+  "private": true,
+  "version": "0.1.0",
+  "engines": { "node": ">=22", "npm": ">=10" },
+  "scripts": {
+    "dev:api": "bash scripts/dev-api.sh",
+    "dev:admin": "bash scripts/dev-admin.sh",
+    "build:api": "bash scripts/run-node-package.sh services/api build",
+    "build:admin": "bash scripts/run-node-package.sh apps/admin-web build",
+    "build:mobile-web": "bash scripts/build-mobile-web.sh",
+    "test:api": "bash scripts/run-node-package.sh services/api test",
+    "test:admin": "bash scripts/run-node-package.sh apps/admin-web test",
+    "test:mobile": "bash scripts/test-mobile-local.sh",
+    "preview:mobile": "python3 scripts/preview-mobile-web.py"
+  }
+}

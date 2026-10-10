@@ -1,0 +1,111 @@
+name: mine2yourlingo
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: mine2yourlingo
+      POSTGRES_USER: mine2yourlingo
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Generate .env with node infrastructure/scripts/setup-local-env.mjs}
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mine2yourlingo -d mine2yourlingo"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "noeviction"]
+    # Local compose network only; never expose unauthenticated Redis to a public network.
+    volumes: ["redis_data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    restart: unless-stopped
+  minio:
+    # Archived upstream source: local compatibility testing only. Production uses managed S3.
+    build: ./infrastructure/minio
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: mine2yourlingo
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?Generate .env first}
+    ports: ["127.0.0.1:9000:9000", "127.0.0.1:9001:9001"]
+    volumes: ["minio_data:/data"]
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+  migrate:
+    build:
+      context: ./services/api
+      target: build
+    command: ["npm", "run", "db:migrate"]
+    environment:
+      DATABASE_URL: postgresql://mine2yourlingo:${POSTGRES_PASSWORD}@postgres:5432/mine2yourlingo?schema=public
+    depends_on:
+      postgres: { condition: service_healthy }
+    restart: "no"
+  storage-init:
+    build:
+      context: ./services/api
+      target: build
+    command: ["node", "/app/scripts/init-storage.mjs"]
+    volumes: ["./infrastructure/scripts/init-storage.mjs:/app/scripts/init-storage.mjs:ro"]
+    environment:
+      S3_ENDPOINT: http://minio:9000
+      S3_REGION: us-east-1
+      S3_BUCKET: mine2yourlingo-audio
+      AWS_ACCESS_KEY_ID: mine2yourlingo
+      AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+    depends_on:
+      minio: { condition: service_healthy }
+    restart: "no"
+  api:
+    build:
+      context: ./services/api
+      target: runtime
+    environment:
+      NODE_ENV: development
+      ENABLE_DEV_AUTH: "true"
+      PORT: "3000"
+      HOST: 0.0.0.0
+      DEV_ADMIN_KEY: ${DEV_ADMIN_KEY:?Generate .env first}
+      DATABASE_URL: postgresql://mine2yourlingo:${POSTGRES_PASSWORD}@postgres:5432/mine2yourlingo?schema=public
+      REDIS_URL: redis://redis:6379
+      DATA_ENCRYPTION_KEY: ${DATA_ENCRYPTION_KEY:?Generate .env first}
+      AUDIO_SIGNING_KEY: ${AUDIO_SIGNING_KEY:?Generate .env first}
+      S3_ENDPOINT: http://minio:9000
+      S3_REGION: us-east-1
+      S3_BUCKET: mine2yourlingo-audio
+      S3_SERVER_SIDE_ENCRYPTION: none
+      AWS_ACCESS_KEY_ID: mine2yourlingo
+      AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+      CORS_ORIGINS: http://localhost:8080,http://localhost:5173
+    ports: ["127.0.0.1:${API_PORT:-3100}:3000"]
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+      redis: { condition: service_healthy }
+      minio: { condition: service_healthy }
+      storage-init: { condition: service_completed_successfully }
+    restart: unless-stopped
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+  admin:
+    build:
+      context: ./apps/admin-web
+      dockerfile: ../../infrastructure/docker/admin.Dockerfile
+      args: { VITE_API_URL: /v1 }
+    ports: ["127.0.0.1:8080:80"]
+    depends_on:
+      api: { condition: service_healthy }
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:

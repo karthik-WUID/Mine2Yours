@@ -72,3 +72,5 @@ uploads/
 # Downloaded/generated browser database runtimes (regenerated for web builds)
 /apps/mobile/web/drift_worker.dart.js
 /apps/mobile/web/sqlite3.wasm
+
+/apps/mobile/web/.sqlite3-download.*

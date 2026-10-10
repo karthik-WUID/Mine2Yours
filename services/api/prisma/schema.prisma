@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+// Private fields are application encrypted in payload. Reference fields remain indexed.
+model User {
+  id String @id @db.Uuid
+  payload String
+  createdAt DateTime @default(now())
+  sessions Session[]
+  memberships GroupMember[]
+  devices Device[]
+  subscriptions Subscription[]
+}
+model Session {
+  id String @id @db.Uuid
+  userId String @db.Uuid
+  payload String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  @@index([userId])
+}
+model Group {
+  id String @id @db.Uuid
+  createdBy String @db.Uuid
+  payload String
+  members GroupMember[]
+  invitations GroupInvitation[]
+  messages Message[]
+  cache TranslationCache[]
+}
+model GroupMember {
+  id String @id @db.Uuid
+  groupId String @db.Uuid
+  userId String @db.Uuid
+  payload String
+  group Group @relation(fields:[groupId], references:[id], onDelete:Cascade)
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  @@unique([groupId,userId])
+  @@index([userId])
+}
+model GroupInvitation {
+  id String @id @db.Uuid
+  groupId String @db.Uuid
+  tokenHash String @unique
+  payload String
+  group Group @relation(fields:[groupId], references:[id], onDelete:Cascade)
+}
+model Message {
+  id String @id @db.Uuid
+  groupId String @db.Uuid
+  senderId String @db.Uuid
+  idempotencyKey String
+  createdAt DateTime @default(now())
+  payload String
+  group Group @relation(fields:[groupId], references:[id], onDelete:Cascade)
+  recipients MessageRecipient[]
+  translations MessageTranslation[]
+  usage UsageEvent[]
+  @@unique([senderId,idempotencyKey])
+  @@index([groupId,createdAt])
+}
+model MessageRecipient {
+  id String @id @db.Uuid
+  messageId String @db.Uuid
+  userId String @db.Uuid
+  payload String
+  message Message @relation(fields:[messageId], references:[id], onDelete:Cascade)
+  @@unique([messageId,userId])
+  @@index([userId])
+}
+model MessageTranslation {
+  id String @id @db.Uuid
+  messageId String @db.Uuid
+  language String
+  payload String
+  message Message @relation(fields:[messageId], references:[id], onDelete:Cascade)
+  @@unique([messageId,language])
+}
+model UsageEvent {
+  id String @id @db.Uuid
+  userId String @db.Uuid
+  groupId String @db.Uuid
+  messageId String? @db.Uuid
+  createdAt DateTime @default(now())
+  payload String
+  message Message? @relation(fields:[messageId], references:[id], onDelete:SetNull)
+  @@index([userId,createdAt])
+  @@index([groupId,createdAt])
+}
+model TranslationCache {
+  id String @id
+  groupId String @db.Uuid
+  payload String
+  group Group @relation(fields:[groupId], references:[id], onDelete:Cascade)
+}
+model Subscription {
+  id String @id @db.Uuid
+  userId String @db.Uuid
+  payload String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  @@index([userId])
+}
+model AuditEvent {
+  id String @id @db.Uuid
+  actorId String
+  action String
+  createdAt DateTime @default(now())
+  payload String
+  @@index([actorId,createdAt])
+}
+model Device {
+  id String @id @db.Uuid
+  userId String @db.Uuid
+  payload String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  @@index([userId])
+}
+model BillingEvent {
+  id String @id @db.Uuid
+  provider String
+  eventId String
+  payload String
+  @@unique([provider,eventId])
+}

@@ -1,0 +1,14 @@
+[
+  {"id":"hello","category":"Everyday","text":"Hello. How are you?","language":"en","icon":"chat"},
+  {"id":"understand","category":"Everyday","text":"Could you say that again, please?","language":"en","icon":"chat"},
+  {"id":"thanks","category":"Everyday","text":"Thank you for your help.","language":"en","icon":"chat"},
+  {"id":"confirm","category":"Everyday","text":"Please confirm that you understood the instruction.","language":"en","icon":"chat"},
+  {"id":"helmet","category":"Safety","text":"Please wear your safety helmet.","language":"en","icon":"safety","requiresReview":true},
+  {"id":"stop","category":"Safety","text":"Stop the work and move to a safe place.","language":"en","icon":"safety","requiresReview":true},
+  {"id":"careful","category":"Safety","text":"Be careful. There is a hazard ahead.","language":"en","icon":"safety","requiresReview":true},
+  {"id":"bring","category":"Work","text":"Please bring the material here.","language":"en","icon":"work"},
+  {"id":"alignment","category":"Work","text":"Check the alignment before continuing.","language":"en","icon":"work","requiresReview":true},
+  {"id":"complete","category":"Work","text":"This task is complete. Please check it.","language":"en","icon":"work"},
+  {"id":"machine","category":"Machinery","text":"Please switch off the machine before checking it.","language":"en","icon":"machine","requiresReview":true},
+  {"id":"help","category":"Everyday","text":"I need some help, please.","language":"en","icon":"chat"}
+]

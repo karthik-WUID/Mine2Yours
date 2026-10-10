@@ -1,0 +1,2521 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/auth/dev": {
+      "post": {
+        "operationId": "AuthController_dev",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DevAuthDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Authenticated session. Credentials are never logged.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/v1/auth/phone/request": {
+      "post": {
+        "operationId": "AuthController_requestPhone",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhoneLoginRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/v1/auth/phone/verify": {
+      "post": {
+        "operationId": "AuthController_verifyPhone",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhoneLoginVerifyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Authenticated session. Credentials are never logged.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/v1/auth/phone/link": {
+      "post": {
+        "operationId": "AuthController_linkPhone",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhoneLoginVerifyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/v1/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refresh",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Authenticated session. Credentials are never logged.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/v1/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/v1/auth/capabilities": {
+      "get": {
+        "operationId": "AuthController_capabilities",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/v1/auth/otp/request": {
+      "post": {
+        "operationId": "AuthController_otp",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OtpRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/v1/auth/otp/verify": {
+      "post": {
+        "operationId": "AuthController_verifyOtp",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OtpVerifyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Authenticated session. Credentials are never logged.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/v1/groups": {
+      "get": {
+        "operationId": "GroupsController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Groups"
+        ]
+      },
+      "post": {
+        "operationId": "GroupsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Groups"
+        ]
+      }
+    },
+    "/v1/groups/join": {
+      "post": {
+        "operationId": "GroupsController_join",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JoinDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Groups"
+        ]
+      }
+    },
+    "/v1/groups/{id}": {
+      "get": {
+        "operationId": "GroupsController_detail",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Groups"
+        ]
+      },
+      "patch": {
+        "operationId": "GroupsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGroupDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Groups"
+        ]
+      },
+      "delete": {
+        "operationId": "GroupsController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Groups"
+        ]
+      }
+    },
+    "/v1/groups/{id}/invitations": {
+      "post": {
+        "operationId": "GroupsController_invite",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvitationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Groups"
+        ]
+      }
+    },
+    "/v1/groups/{id}/leave": {
+      "post": {
+        "operationId": "GroupsController_leave",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Groups"
+        ]
+      }
+    },
+    "/v1/groups/{id}/members/{userId}": {
+      "delete": {
+        "operationId": "GroupsController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Groups"
+        ]
+      },
+      "patch": {
+        "operationId": "GroupsController_role",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberRoleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Groups"
+        ]
+      }
+    },
+    "/v1/groups/{team}/workers": {
+      "get": {
+        "operationId": "WorkersController_list",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      },
+      "post": {
+        "operationId": "WorkersController_create",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      }
+    },
+    "/v1/groups/{team}/workers/{id}": {
+      "get": {
+        "operationId": "WorkersController_detail",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      },
+      "patch": {
+        "operationId": "WorkersController_update",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      },
+      "delete": {
+        "operationId": "WorkersController_remove",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      }
+    },
+    "/v1/groups/{team}/workers/{id}/document": {
+      "post": {
+        "operationId": "WorkersController_document",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkerDocumentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      },
+      "get": {
+        "operationId": "WorkersController_readDocument",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      },
+      "delete": {
+        "operationId": "WorkersController_deleteDocument",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      }
+    },
+    "/v1/groups/{team}/workers/{id}/payments/{entry}": {
+      "delete": {
+        "operationId": "WorkersController_removePayment",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entry",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      }
+    },
+    "/v1/groups/{team}/workers/{id}/work/{entry}": {
+      "delete": {
+        "operationId": "WorkersController_removeWork",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entry",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      }
+    },
+    "/v1/groups/{team}/workers/{id}/payments": {
+      "post": {
+        "operationId": "WorkersController_payment",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkerPaymentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      }
+    },
+    "/v1/groups/{team}/workers/{id}/work": {
+      "post": {
+        "operationId": "WorkersController_work",
+        "parameters": [
+          {
+            "name": "team",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkerLogDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Private personnel records"
+        ]
+      }
+    },
+    "/v1/users/me": {
+      "get": {
+        "operationId": "UsersController_profile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      },
+      "patch": {
+        "operationId": "UsersController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "operationId": "UsersController_delete",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteAccountDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/v1/users/me/devices": {
+      "get": {
+        "operationId": "UsersController_devices",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      },
+      "post": {
+        "operationId": "UsersController_addDevice",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/v1/users/me/devices/{id}": {
+      "delete": {
+        "operationId": "UsersController_revoke",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/v1/users/me/sessions": {
+      "get": {
+        "operationId": "UsersController_sessions",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/v1/users/me/sessions/{id}": {
+      "delete": {
+        "operationId": "UsersController_revokeSession",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/v1/messages": {
+      "post": {
+        "operationId": "MessagingController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Messages"
+        ]
+      },
+      "get": {
+        "operationId": "MessagingController_list",
+        "parameters": [
+          {
+            "name": "groupId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Messages"
+        ]
+      }
+    },
+    "/v1/messages/{id}": {
+      "get": {
+        "operationId": "MessagingController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Messages"
+        ]
+      }
+    },
+    "/v1/messages/{id}/ack": {
+      "post": {
+        "operationId": "MessagingController_ack",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AckDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Messages"
+        ]
+      }
+    },
+    "/v1/messages/{id}/confirm": {
+      "post": {
+        "operationId": "MessagingController_confirm",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Messages"
+        ]
+      }
+    },
+    "/v1/messages/{id}/retry": {
+      "post": {
+        "operationId": "MessagingController_retry",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Messages"
+        ]
+      }
+    },
+    "/v1/messages/{id}/cancel": {
+      "post": {
+        "operationId": "MessagingController_cancel",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Messages"
+        ]
+      }
+    },
+    "/v1/audio/transcribe": {
+      "post": {
+        "operationId": "AudioController_transcribe",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TranscribeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Audio"
+        ]
+      }
+    },
+    "/v1/audio/{id}": {
+      "get": {
+        "operationId": "AudioController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expires",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "signature",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Audio"
+        ]
+      }
+    },
+    "/v1/plans": {
+      "get": {
+        "operationId": "BillingController_plans",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Billing"
+        ]
+      }
+    },
+    "/v1/usage": {
+      "get": {
+        "operationId": "BillingController_usageForUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Billing"
+        ]
+      }
+    },
+    "/v1/billing/purchases/verify": {
+      "post": {
+        "operationId": "BillingController_verify",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Billing"
+        ]
+      }
+    },
+    "/v1/billing/webhook": {
+      "post": {
+        "operationId": "BillingController_webhook",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Billing"
+        ]
+      }
+    },
+    "/v1/admin/overview": {
+      "get": {
+        "operationId": "AnalyticsController_overview",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Administration"
+        ]
+      }
+    },
+    "/v1/privacy/export": {
+      "get": {
+        "operationId": "PrivacyController_export",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Privacy"
+        ]
+      }
+    },
+    "/v1/health": {
+      "get": {
+        "operationId": "SystemController_health",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "System"
+        ]
+      }
+    },
+    "/v1/capabilities": {
+      "get": {
+        "operationId": "SystemController_capabilities",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "System"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Mine2YourLingo API",
+    "description": "Private multilingual communication API. Development authentication requires explicit opt-in. Audio requires verified PCM WAV. Missing providers or reviewed pricing fail closed. Message review, delivery and playback are separate states. See packages/api-contracts for complete public response interfaces.",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "DevAuthDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "displayName": {
+            "maxLength": 80,
+            "minLength": 1,
+            "type": "string"
+          },
+          "language": {
+            "enum": [
+              "ta",
+              "bn",
+              "hi",
+              "or",
+              "en",
+              "te",
+              "kn",
+              "ml",
+              "mr",
+              "gu",
+              "pa",
+              "ur",
+              "as",
+              "brx",
+              "doi",
+              "ks",
+              "kok",
+              "mai",
+              "mni",
+              "ne",
+              "sa",
+              "sat",
+              "sd",
+              "es",
+              "fr",
+              "de",
+              "ar",
+              "zh",
+              "ja",
+              "pt"
+            ],
+            "type": "string"
+          },
+          "adminKey": {
+            "maxLength": 100,
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayName",
+          "language"
+        ]
+      },
+      "PhoneLoginRequestDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "phone": {
+            "type": "string",
+            "pattern": "^\\+[1-9][0-9]{7,14}$"
+          }
+        },
+        "required": [
+          "phone"
+        ]
+      },
+      "PhoneLoginVerifyDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^\\d{6}$"
+          },
+          "displayName": {
+            "maxLength": 80,
+            "minLength": 2,
+            "type": "string"
+          },
+          "language": {
+            "enum": [
+              "ta",
+              "bn",
+              "hi",
+              "or",
+              "en",
+              "te",
+              "kn",
+              "ml",
+              "mr",
+              "gu",
+              "pa",
+              "ur",
+              "as",
+              "brx",
+              "doi",
+              "ks",
+              "kok",
+              "mai",
+              "mni",
+              "ne",
+              "sa",
+              "sat",
+              "sd",
+              "es",
+              "fr",
+              "de",
+              "ar",
+              "zh",
+              "ja",
+              "pt"
+            ],
+            "type": "string"
+          },
+          "phone": {
+            "type": "string",
+            "pattern": "^\\+[1-9][0-9]{7,14}$"
+          }
+        },
+        "required": [
+          "code",
+          "language",
+          "phone"
+        ]
+      },
+      "RefreshDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "refreshToken": {
+            "maxLength": 128,
+            "minLength": 20,
+            "type": "string"
+          }
+        },
+        "required": [
+          "refreshToken"
+        ]
+      },
+      "OtpRequestDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "phone": {
+            "type": "string",
+            "pattern": "^\\+[1-9][0-9]{7,14}$"
+          }
+        },
+        "required": [
+          "phone"
+        ]
+      },
+      "OtpVerifyDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^[0-9]{4,10}$"
+          },
+          "displayName": {
+            "maxLength": 80,
+            "minLength": 1,
+            "type": "string"
+          },
+          "language": {
+            "enum": [
+              "ta",
+              "bn",
+              "hi",
+              "or",
+              "en",
+              "te",
+              "kn",
+              "ml",
+              "mr",
+              "gu",
+              "pa",
+              "ur",
+              "as",
+              "brx",
+              "doi",
+              "ks",
+              "kok",
+              "mai",
+              "mni",
+              "ne",
+              "sa",
+              "sat",
+              "sd",
+              "es",
+              "fr",
+              "de",
+              "ar",
+              "zh",
+              "ja",
+              "pt"
+            ],
+            "type": "string"
+          },
+          "phone": {
+            "type": "string",
+            "pattern": "^\\+[1-9][0-9]{7,14}$"
+          }
+        },
+        "required": [
+          "code",
+          "displayName",
+          "language",
+          "phone"
+        ]
+      },
+      "GroupDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 500,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "JoinDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "token": {
+            "maxLength": 128,
+            "minLength": 20,
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "UpdateGroupDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 500,
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "InvitationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expiresInHours": {
+            "maximum": 168,
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": []
+      },
+      "MemberRoleDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "role": {
+            "enum": [
+              "admin",
+              "moderator",
+              "member"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "role"
+        ]
+      },
+      "WorkerDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "displayName": {
+            "maxLength": 80,
+            "minLength": 2,
+            "type": "string"
+          },
+          "linkedUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "phone": {
+            "type": "string",
+            "pattern": "^(\\+[1-9][0-9]{7,14})?$",
+            "maxLength": 20
+          },
+          "jobTitle": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "workDetails": {
+            "maxLength": 2000,
+            "type": "string"
+          },
+          "site": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "joinedDate": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "on_leave",
+              "left"
+            ],
+            "type": "string"
+          },
+          "salaryAmount": {
+            "maximum": 10000000,
+            "minimum": 0,
+            "type": "number"
+          },
+          "salaryPeriod": {
+            "enum": [
+              "day",
+              "week",
+              "month"
+            ],
+            "type": "string"
+          },
+          "photoData": {
+            "maxLength": 400000,
+            "type": "string"
+          },
+          "consent": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "displayName",
+          "phone",
+          "jobTitle",
+          "workDetails",
+          "site",
+          "joinedDate",
+          "status",
+          "salaryAmount",
+          "salaryPeriod",
+          "consent"
+        ]
+      },
+      "WorkerDocumentDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "mimeType": {
+            "enum": [
+              "image/jpeg",
+              "image/png"
+            ],
+            "type": "string"
+          },
+          "base64": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9+/]+={0,2}$",
+            "maxLength": 1500000
+          },
+          "consent": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "mimeType",
+          "base64",
+          "consent"
+        ]
+      },
+      "WorkerPaymentDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "amount": {
+            "maximum": 10000000,
+            "minimum": 0.01,
+            "type": "number"
+          },
+          "note": {
+            "maxLength": 500,
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "amount",
+          "note"
+        ]
+      },
+      "WorkerLogDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "hours": {
+            "maximum": 24,
+            "minimum": 0,
+            "type": "number"
+          },
+          "detail": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "hours",
+          "detail"
+        ]
+      },
+      "ProfileDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "displayName": {
+            "maxLength": 80,
+            "minLength": 1,
+            "type": "string"
+          },
+          "spokenLanguage": {
+            "enum": [
+              "ta",
+              "bn",
+              "hi",
+              "or",
+              "en",
+              "te",
+              "kn",
+              "ml",
+              "mr",
+              "gu",
+              "pa",
+              "ur",
+              "as",
+              "brx",
+              "doi",
+              "ks",
+              "kok",
+              "mai",
+              "mni",
+              "ne",
+              "sa",
+              "sat",
+              "sd",
+              "es",
+              "fr",
+              "de",
+              "ar",
+              "zh",
+              "ja",
+              "pt"
+            ],
+            "type": "string"
+          },
+          "listeningLanguage": {
+            "enum": [
+              "ta",
+              "bn",
+              "hi",
+              "or",
+              "en",
+              "te",
+              "kn",
+              "ml",
+              "mr",
+              "gu",
+              "pa",
+              "ur",
+              "as",
+              "brx",
+              "doi",
+              "ks",
+              "kok",
+              "mai",
+              "mni",
+              "ne",
+              "sa",
+              "sat",
+              "sd",
+              "es",
+              "fr",
+              "de",
+              "ar",
+              "zh",
+              "ja",
+              "pt"
+            ],
+            "type": "string"
+          },
+          "receivingMode": {
+            "enum": [
+              "notification",
+              "automatic",
+              "headphones",
+              "silent"
+            ],
+            "type": "string"
+          },
+          "quietHours": {
+            "maxLength": 30,
+            "type": "string"
+          },
+          "providerConsent": {
+            "type": "boolean"
+          }
+        },
+        "required": []
+      },
+      "DeleteAccountDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "confirmation": {
+            "enum": [
+              "DELETE"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "confirmation"
+        ]
+      },
+      "DeviceDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "maxLength": 80,
+            "type": "string"
+          },
+          "platform": {
+            "enum": [
+              "android",
+              "ios",
+              "web"
+            ],
+            "type": "string"
+          },
+          "pushToken": {
+            "maxLength": 2048,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "platform"
+        ]
+      },
+      "MessageDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "processing": {
+            "enum": [
+              "device",
+              "cloud"
+            ],
+            "type": "string"
+          },
+          "groupId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "recipientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sourceLanguage": {
+            "enum": [
+              "ta",
+              "bn",
+              "hi",
+              "or",
+              "en",
+              "te",
+              "kn",
+              "ml",
+              "mr",
+              "gu",
+              "pa",
+              "ur",
+              "as",
+              "brx",
+              "doi",
+              "ks",
+              "kok",
+              "mai",
+              "mni",
+              "ne",
+              "sa",
+              "sat",
+              "sd",
+              "es",
+              "fr",
+              "de",
+              "ar",
+              "zh",
+              "ja",
+              "pt"
+            ],
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "audioBase64": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9+/]*={0,2}$",
+            "maxLength": 5600000
+          },
+          "mimeType": {
+            "enum": [
+              "audio/wav",
+              "audio/mpeg",
+              "audio/mp4",
+              "audio/webm",
+              "audio/ogg",
+              "audio/x-m4a"
+            ],
+            "type": "string"
+          },
+          "durationSeconds": {
+            "maximum": 60,
+            "minimum": 0.1,
+            "type": "number"
+          },
+          "idempotencyKey": {
+            "maxLength": 128,
+            "minLength": 8,
+            "type": "string"
+          },
+          "mode": {
+            "enum": [
+              "direct",
+              "group",
+              "broadcast"
+            ],
+            "type": "string"
+          },
+          "needsReview": {
+            "type": "boolean"
+          },
+          "requiresReview": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "groupId",
+          "sourceLanguage",
+          "idempotencyKey",
+          "mode"
+        ]
+      },
+      "AckDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "state": {
+            "enum": [
+              "DELIVERED",
+              "PLAYBACK_STARTED",
+              "PLAYBACK_COMPLETED",
+              "FAILED"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "TranscribeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "groupId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sourceLanguage": {
+            "enum": [
+              "ta",
+              "bn",
+              "hi",
+              "or",
+              "en",
+              "te",
+              "kn",
+              "ml",
+              "mr",
+              "gu",
+              "pa",
+              "ur",
+              "as",
+              "brx",
+              "doi",
+              "ks",
+              "kok",
+              "mai",
+              "mni",
+              "ne",
+              "sa",
+              "sat",
+              "sd",
+              "es",
+              "fr",
+              "de",
+              "ar",
+              "zh",
+              "ja",
+              "pt"
+            ],
+            "type": "string"
+          },
+          "audioBase64": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9+/]*={0,2}$",
+            "maxLength": 5600000
+          },
+          "mimeType": {
+            "enum": [
+              "audio/wav"
+            ],
+            "type": "string"
+          },
+          "durationSeconds": {
+            "maximum": 60,
+            "minimum": 0.1,
+            "type": "number"
+          },
+          "idempotencyKey": {
+            "maxLength": 128,
+            "minLength": 8,
+            "type": "string"
+          }
+        },
+        "required": [
+          "groupId",
+          "sourceLanguage",
+          "audioBase64",
+          "mimeType",
+          "idempotencyKey"
+        ]
+      },
+      "PurchaseDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "provider": {
+            "enum": [
+              "apple",
+              "google",
+              "web"
+            ],
+            "type": "string"
+          },
+          "receipt": {
+            "maxLength": 20000,
+            "type": "string"
+          }
+        },
+        "required": [
+          "provider",
+          "receipt"
+        ]
+      },
+      "Profile": {
+        "type": "object",
+        "required": [
+          "id",
+          "displayName",
+          "spokenLanguage",
+          "listeningLanguage",
+          "providerConsent"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "spokenLanguage": {
+            "type": "string"
+          },
+          "listeningLanguage": {
+            "type": "string"
+          },
+          "receivingMode": {
+            "type": "string",
+            "enum": [
+              "notification",
+              "automatic",
+              "headphones",
+              "silent"
+            ]
+          },
+          "providerConsent": {
+            "type": "boolean"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SessionResponse": {
+        "type": "object",
+        "required": [
+          "accessToken",
+          "refreshToken",
+          "expiresIn",
+          "user"
+        ],
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          },
+          "expiresIn": {
+            "type": "integer",
+            "example": 900
+          },
+          "user": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "development-simulator",
+              "development-phone",
+              "verified-phone"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
