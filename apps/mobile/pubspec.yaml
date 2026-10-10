@@ -48,7 +48,7 @@ dependencies:
   path_provider: 2.1.6
   # 2.4.4 retains the native plugin. 2.6.0's FFI build hook requires Xcode
   # even for host widget tests; this compatible pin supports the available host.
-  path_provider_foundation: 2.4.4
+  path_provider_foundation: 2.6.0
   uuid: 4.6.0
   intl: 0.20.3
   file_selector: 1.1.0
