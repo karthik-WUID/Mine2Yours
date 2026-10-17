@@ -1,6 +1,6 @@
 # Local S3-compatibility helper. Upstream is archived and AGPL-3.0 licensed.
 # Build the official pinned source because historical public binary images are unavailable.
-FROM golang:1.24.8-bookworm AS build
+FROM golang:1.27.2-bookworm AS build
 WORKDIR /source
 ADD https://github.com/minio/minio/archive/9e49d5e7a648f00e26f2246f4dc28e6b07f8c84a.tar.gz /tmp/minio-source.tar.gz
 RUN tar -xzf /tmp/minio-source.tar.gz --strip-components=1 -C /source && rm /tmp/minio-source.tar.gz
